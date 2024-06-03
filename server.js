@@ -2,18 +2,10 @@
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
-const formidable = require('formidable');
+const marked = require('marked');
 
 const app = express();
 
-const notes = fs.readdirSync(path.join(__dirname, 'notes')).filter(file => file.endsWith('.md'));
-
-app.set('view engine', 'ejs');
-app.set('views', __dirname);
-
-app.get('/', (req, res) => {
-  res.render('index', { notes });
-});
 
 app.get('/notes', (req, res) => {
   fs.readdir(path.join(__dirname, 'notes'), (err, files) => {
@@ -30,7 +22,8 @@ app.get('/notes/:noteName', (req, res) => {
     if (err) {
       res.status(404).send('Not Found');
     } else {
-      res.send(data);
+      const html = marked(data);
+      res.send(html);
     }
   });
 });

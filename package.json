@@ -9,9 +9,8 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "ejs": "^3.1.10",
     "express": "^4.19.2",
-    "formidable": "^3.5.1",
+    "marked": "^12.0.2",
     "nodemon": "^3.1.2"
   }
 }
